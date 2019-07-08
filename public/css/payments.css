@@ -1,0 +1,13 @@
+.basic-booking-info, .basic-package-info, .basic-pricing-info
+ {
+  padding: 15px;
+  background: #f5f5f5;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.nav-form {
+  display: inline-block;
+}

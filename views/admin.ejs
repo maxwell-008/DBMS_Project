@@ -1,0 +1,130 @@
+<% include partials/header %>
+
+<link href="/css/profile.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<!-- Navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <form action="/" method="GET"><button class="btn btn-default navbar-btn">Travel Bhai</button></form>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <form class="nav-form" action="/about" method="GET"><button class="btn btn-default navbar-btn">About</button></form>
+              <form class="nav-form" action="/profile/<%= result[0].username %>" method="GET"><button class="btn btn-default navbar-btn"><%= result[0].username %></button></form>
+              <form class="nav-form" action="/logout" method="GET"><button class="btn btn-default navbar-btn">Log Out</button></form>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+      <h1>Edit Profile</h1>
+      <hr>
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-3">
+          <div class="text-center">
+            <h2>
+              <u>Username</u>
+            </h2>
+            <!-- <img src="https://images.freeimages.com/images/large-previews/6d3/entrance-to-amber-palace-1542611.jpg" class="img-thumbnail"> -->
+            <h3>
+              <%= result[0].username %>
+            </h3>
+            <form action="/destinationManage" method="GET" class="nav-form"><button class="btn btn-primary btn-lg" style="margin-bottom: 15px;">Manage Destination</button></form>
+            <form action="/packageManage" method="GET" class="nav-form"><button class="btn btn-primary btn-lg">Manage Package</button></form>
+          </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+
+          <h2 class="personal-info">Personal info</h2>
+
+          <form class="form-horizontal" action="/profile/<%= result[0].username %>" method="POST">
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Full Name : </label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="<%= result[0].full_name%>" name="fullname" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label"> Contact : </label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="<%= result[0].contact %>" name="contact" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Email:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="<%= result[0].email %>" name="email" disabled>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label">Password:</label>
+              <div class="col-md-8">
+                <input class="form-control" type="password" value="<%= result[0].password %>" name="password" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">Confirm password:</label>
+              <div class="col-md-8">
+                <input class="form-control" type="password" value="<%= result[0].password %>" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label"></label>
+              <div class="col-md-8">
+                <button class="btn btn-primary">Save Changes</button>
+              </div>
+            </div>
+          </form>
+          <button class="btn btn-default" onclick="toggleInput()">Toggle Edit </button>
+          <button class="btn btn-default" onclick="resetInput()">Reset</button>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <script>
+      
+      function resetInput() {
+        var inputs = document.getElementsByClassName("form-control");
+        for(var i = 0; i < inputs.length; i++) {
+          inputs[i].value = "";
+        }
+      }
+
+      function toggleInput() {
+        var inputs = document.getElementsByClassName("form-control");
+        for (var i = 0; i < inputs.length; i++) {
+          if (inputs[i].disabled == false) {
+            inputs[i].disabled = true;
+          } else {
+            inputs[i].disabled = false;
+          }
+        }
+      }
+
+    </script>
+
+    <% include partials/footer %>

@@ -1,0 +1,36 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.package-details {
+    background: #F5F5F5;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.find-package {
+    margin-top: 5px;
+}
+
+.destination-package-image {
+    width: 200px;
+    height: 200px;
+}
+
+.destination-package-interact {
+    padding-top: 20px;
+    padding-left: 120px;
+}
+
+.destination-package-destinfo {
+    background: #F5F5F5;
+}
+
+.nav-form {
+    display: inline-block;
+}
+
+.destination-image { 
+    margin-top: 15px;
+}

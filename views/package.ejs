@@ -1,0 +1,126 @@
+<% include partials/header %>
+    <link href="/css/package.css" rel="stylesheet" type="text/css">
+
+    </head>
+
+    <body>
+   
+    <!-- Navbar -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <form action="/" method="GET"><button class="btn btn-default navbar-btn">Travel Bhai</button></form>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <form action="/about" method="GET" class="nav-form"><button class="btn btn-default navbar-btn">About</button></form>
+                            <% if(locals.username) { %>
+                                <form action="/profile/<%= locals.username %>" method="GET" class="nav-form"><button class="btn btn-default navbar-btn"><%= locals.username %></button></form>
+                                <form action="/logout" method="GET" class="nav-form"><button class="btn btn-default navbar-btn">Log Out</button></form>
+                            <% } else { %>
+                                <form action="/login" method="GET" class="nav-form"><button class="btn btn-default navbar-btn">Login</button></form>
+                                <form action="/signup" method="GET" class="nav-form"><button class="btn btn-default navbar-btn">Sign Up</button></form>                            
+                            <% } %>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <div class="container">
+            <div class="row destination-information">
+                <div class="main-destination-information">
+                    <div class="col-md-4">
+                        <img src="<%= result[0].package_image %>" alt="package-destination-image" class="img-thumbnail">
+                    </div>
+                    <div class="col-md-8">
+                        <h2><%= result[0].dest_name %></h2>
+                        <p><%= result[0].dest_desc %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row package-information">
+                <div class="col-md-6">
+                    <div class="main-package-information">
+                    <h2>Package Name : <%=result[0].package_name%></h2>
+                    <p>Package Details : <%= result[0].package_desc%>
+                    </p>
+                    <h3>Package Rate Per Person: Rs. <%= result[0].rate%></h3>
+                    <input type="number" min=1 name="" id="person_count" placeholder=1 value=1><button onclick="updateNumber()">Update number</button>
+                    <h3>Final Cost : <span id="final_cost"><%= result[0].rate %></span></h3>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="main-hotel-information">
+                        <h2>Hotel Name : <%= result[0].hotel_name %></h2>
+                        <h3>Hotel Address : <%= result[0].hotel_address %></h3>
+                        <h3>Hotel Contact : <%= result[0].hotel_contact%></h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <% if(locals.username) { %>
+                    <% if(type == "user") { %>
+                        <button class="btn btn-primary btn-lg" onclick="sendDetails()">Make Payment</button>
+                    <% } else { %>
+                        <h2>Sorry for being an admin :P </h2>
+                    <% } %>
+                <% } else { %>
+                    <h3>You need to sign up or login to choose package</h3>
+                    <form action="/login" style="margin-bottom: 15px;"><button class="btn btn-primary btn-lg">Login</button></form> 
+                    <form action="/signup"><button class="btn btn-primary btn-lg">Sign Up</button></form>
+                <% } %>
+            </div>
+
+        </div>
+
+
+        <div id="popup1" class="overlay">
+	        <div class="popup">
+		        <h2>Here i am</h2>
+		        <a class="close" href="#">&times;</a>
+		        <div class="content">
+			        Thank to pop me out of that button, but now i'm done so you can close this window.
+		        </div>
+	        </div>
+        </div>
+
+        <script>
+            function updateNumber() {
+                var personCount = document.getElementById("person_count").value;
+                var rate = <%= result[0].rate %>;
+                var finalCost = rate * personCount;
+                document.getElementById("final_cost").innerHTML = finalCost;
+            }
+
+            function sendDetails() {
+                var finalCost = document.getElementById("final_cost").innerHTML;
+                var personCount = document.getElementById("person_count").value;
+                $('<form action="/profile/<%= locals.username %>/payments" method="POST"/>')
+                .append($('<input type="hidden" name="package_id" value="<%= result[0].package_id %>">'))
+                .append($('<input type="hidden" name="amount" value=' + finalCost + '>'))
+                .append($('<input type="hidden" name="person_count" value=' + personCount + '>'))
+                .appendTo($(document.body)) //it has to be added somewhere into the <body>
+                .submit();
+            }
+
+        </script>
+<% include partials/footer %>

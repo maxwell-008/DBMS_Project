@@ -1,0 +1,72 @@
+<% include partials/header %>
+
+  <link href="/css/payments.css" rel="stylesheet" type="text/css">
+
+  </head>
+
+  <body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <form action="/" method="GET"><button class="btn btn-default navbar-btn">Travel Bhai</button></form>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <form class="nav-form" action="/about" method="GET"><button class="btn btn-default navbar-btn">About</button></form>
+              <form class="nav-form" action="/profile/<%= username%>" method="GET"><button class="btn btn-default navbar-btn"><%= username %></button></form>
+              <form class="nav-form" action="/logout" method="GET"><button class="btn btn-default navbar-btn">Log Out</button></form>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+      <% for(var i = 0; i < result.length; i++) { %>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="basic-booking-info">
+              <h2>Transaction ID : <%= result[i].transaction_id%></h2>
+              <h3>Package ID : <%= result[i].package_id%></h3>
+              <div>
+                <img src="<%= result[i].package_image %>" alt="package-destination-image" class="img-thumbnail">
+              </div>
+              <h3>Date of Transaction : <%= result[i].booking_date %></h3>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="basic-package-info">
+              <h2>Package Name : <%= result[i].package_name %></h2>
+              <p><%= result[i].package_desc %></p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="basic-pricing-info">
+              <h2>Rate per person : <%= result[i].rate %></h2>
+              <h3 id="people-quantity">Number of people : <%= result[i].person_count %></h3>
+              <h3>Total Cost : Rs.<%= result[i].amount %></h3>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+
+    <% include partials/footer %>

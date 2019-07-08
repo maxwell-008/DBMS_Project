@@ -1,0 +1,85 @@
+<% include partials/header %>
+
+  <link href="/css/signup.css" rel="stylesheet" type="text/css" >
+
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <form action="/" method="GET"><button class="btn btn-default navbar-btn">Travel Bhai</button></form>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <form class="nav-form" action="/about" method="GET"><button class="btn btn-nav navbar-btn">About</button></form>
+              <form class="nav-form" action="/login" method="GET"><button class="btn btn-nav navbar-btn">Login</button></form>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <img src="">
+        </div>
+        <div class="col-lg-6">
+          <div class="container-fluid">
+            <h3 class="text-center">Create Account</h3>
+            <div class="container-fluid">
+
+              <!-- Registration form for user -->
+              <form action="/profile" method="POST">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Password</label>
+                    <input type="password" class="form-control" id="inputPassword4" name="password" placeholder="Password">
+                  </div>
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="fullname">Full Name</label>
+                  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="John Doe">
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="contact">Contact</label>
+                    <input type="number" min="1" class="form-control" id="contact" name="contact" placeholder="contact">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <% include partials/footer %>
